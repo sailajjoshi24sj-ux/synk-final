@@ -1,0 +1,229 @@
+Completely redesign the HERO / LANDING SECTION of the Synk Corp website.
+
+This is the MOST IMPORTANT section of the entire website.
+
+The hero section must instantly:
+
+* Grab attention in under 3 seconds
+* Feel world-class and futuristic
+* Build trust immediately
+* Make users want to continue scrolling
+* Showcase Synk Corp as a premium AI/software company
+
+The current hero is too basic.
+We need something visually unforgettable.
+
+The feeling should be:
+
+* Cinematic
+* Interactive
+* Premium
+* Intelligent
+* Futuristic
+* Minimal yet powerful
+
+INSPIRE THE DESIGN FROM:
+
+* Apple
+* Linear
+* Stripe
+* Vercel
+* Framer
+* Arc Browser
+* Raycast
+* Modern Awwwards websites
+* AI startup landing pages
+
+IMPORTANT:
+Do NOT create a generic centered heading with buttons.
+The hero must feel like a living product experience.
+
+HERO LAYOUT CONCEPT:
+Create a layered cinematic hero experience with:
+
+* Sticky fullscreen layout
+* Floating UI panels
+* AI dashboard previews
+* Animated app screens
+* Live chat interactions
+* Dynamic lighting
+* Glassmorphism cards
+* Mouse-reactive motion
+* Smooth parallax depth
+
+The hero should feel like:
+“A premium AI operating system.”
+
+BACKGROUND:
+Use:
+
+* Pure white/light premium background
+* Soft mesh gradients
+* Floating blur lights
+* Layered radial gradients
+* Subtle animated noise texture
+* Ambient glow effects
+
+Avoid:
+
+* Flat backgrounds
+* Generic gradients
+* Dark heavy themes
+
+HEADLINE DESIGN:
+The headline must be HUGE, bold, premium, and visually balanced.
+
+Possible headline:
+“Building Intelligent Digital Experiences”
+
+OR improve it with something stronger like:
+“AI-Powered Experiences Built for Modern Businesses”
+
+The typography should feel:
+
+* Apple-level premium
+* Extremely clean
+* Spacious
+* Confident
+* High-end
+
+Use:
+
+* Multi-line heading
+* Strong hierarchy
+* Premium font pairing
+* Text reveal animations
+
+SUBHEADLINE:
+A short premium supporting statement:
+“We create websites, mobile apps, AI systems, and automation workflows that help businesses grow faster.”
+
+Do NOT make it too long.
+
+CTA SECTION:
+The CTA buttons must feel premium and interactive.
+
+Primary CTA:
+“Start Your Project”
+
+Secondary CTA:
+“Explore Work”
+
+Add:
+
+* Hover glow
+* Magnetic hover movement
+* Soft depth shadows
+* Smooth micro interactions
+
+INTERACTIVE HERO VISUAL:
+This is the KEY part.
+
+Instead of a static image, create a dynamic AI ecosystem visualization.
+
+Include:
+
+* Floating AI dashboard cards
+* Instagram/Facebook DM previews
+* Analytics widgets
+* Automation flow diagrams
+* Mobile app mockups
+* AI chatbot windows
+* Notification cards
+* Typing indicators
+* Data visualization elements
+
+The UI cards should:
+
+* Float slightly in 3D space
+* React subtly to mouse movement
+* Animate slowly with parallax motion
+* Have glassmorphism effects
+* Feel premium and realistic
+
+SPECIAL “WOW” EFFECT:
+As the user scrolls:
+
+* The hero remains pinned briefly
+* UI cards move in depth
+* Text scales slightly
+* Background gradients shift softly
+* Layers separate with parallax motion
+
+But IMPORTANT:
+Do NOT overdo the animation.
+It must remain buttery smooth and elegant.
+
+SCROLL EXPERIENCE:
+The first scroll interaction should feel magical.
+
+Examples:
+
+* Hero compresses elegantly
+* Dashboard cards rearrange smoothly
+* Content transitions naturally into next section
+* Smooth storytelling motion
+
+Avoid:
+
+* Heavy laggy pinning
+* Overly long scroll lock
+* Abrupt transitions
+
+PERFORMANCE:
+The hero must be optimized carefully.
+
+Use:
+
+* GPU transforms only
+* transform + opacity animations only
+* Optimized GSAP timelines
+* Lightweight blur usage
+* requestAnimationFrame optimization
+
+MOBILE HERO EXPERIENCE:
+The mobile version is EXTREMELY IMPORTANT.
+
+Requirements:
+
+* Full-width clean layout
+* Proper spacing from navbar
+* Responsive typography
+* Simplified floating elements
+* Smooth performance on mobile
+* No overlapping cards
+* No clipped content
+
+On mobile:
+
+* Reduce animation complexity
+* Keep cinematic feel
+* Maintain premium design quality
+
+ADD TRUST ELEMENTS:
+Below the hero CTA add:
+
+* Technologies used
+* Small trust badges
+* Client/project counters
+* “Trusted by modern businesses”
+* Animated marquee of technologies
+
+FINAL GOAL:
+When users open the website they should instantly think:
+
+“This company looks expensive, advanced, modern, and trustworthy.”
+
+The hero should be strong enough that users immediately want to:
+
+* Scroll further
+* Contact Synk Corp
+* Build their project with the company
+
+The final experience should feel like:
+
+* A premium AI product launch
+* A next-generation software company
+* A world-class interactive experience
+
+NOT a normal agency template.

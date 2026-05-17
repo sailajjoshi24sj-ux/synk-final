@@ -1,0 +1,495 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Premium Light Theme - Synk Corp */
+  --background: oklch(0.99 0.005 250);
+  --foreground: oklch(0.15 0.02 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 250);
+  --primary: oklch(0.55 0.25 260);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.2 0.02 250);
+  --muted: oklch(0.94 0.01 250);
+  --muted-foreground: oklch(0.45 0.02 250);
+  --accent: oklch(0.6 0.2 200);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.01 250);
+  --input: oklch(0.96 0.01 250);
+  --ring: oklch(0.55 0.25 260);
+  --chart-1: oklch(0.55 0.25 260);
+  --chart-2: oklch(0.6 0.2 200);
+  --chart-3: oklch(0.55 0.22 290);
+  --chart-4: oklch(0.6 0.18 170);
+  --chart-5: oklch(0.65 0.15 80);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.98 0.005 250);
+  --sidebar-foreground: oklch(0.15 0.02 250);
+  --sidebar-primary: oklch(0.55 0.25 260);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.96 0.01 250);
+  --sidebar-accent-foreground: oklch(0.2 0.02 250);
+  --sidebar-border: oklch(0.92 0.01 250);
+  --sidebar-ring: oklch(0.55 0.25 260);
+  --cyan: #00d4ff;
+  --purple: #7c3aed;
+}
+
+/* ── Gradient CTA button ─────────────────────────────────────────────── */
+.bp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+  font-family: inherit;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+.bp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+}
+.bp:active {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.45);
+}
+
+.dark {
+  --background: oklch(0.08 0.01 250);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.12 0.01 250);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.1 0.01 250);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.65 0.22 250);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.18 0.02 250);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.2 0.01 250);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.7 0.18 200);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.22 0.02 250);
+  --input: oklch(0.18 0.02 250);
+  --ring: oklch(0.65 0.22 250);
+  --chart-1: oklch(0.65 0.22 250);
+  --chart-2: oklch(0.7 0.18 200);
+  --chart-3: oklch(0.6 0.2 290);
+  --chart-4: oklch(0.75 0.15 170);
+  --chart-5: oklch(0.8 0.12 80);
+  --sidebar: oklch(0.1 0.01 250);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.65 0.22 250);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.18 0.02 250);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.22 0.02 250);
+  --sidebar-ring: oklch(0.65 0.22 250);
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom Scrollbar - Light Theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.96 0.01 250);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.75 0.02 250);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.6 0.02 250);
+}
+
+/* Gradient text utility - Light Theme */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.5 0.25 260), oklch(0.55 0.2 200), oklch(0.5 0.22 290));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects - Softer for light theme */
+.glow-blue {
+  box-shadow: 0 0 60px -15px oklch(0.55 0.25 260 / 0.25);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 60px -15px oklch(0.6 0.2 200 / 0.25);
+}
+
+/* Glassmorphism - Light Theme */
+.glass {
+  background: oklch(1 0 0 / 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid oklch(0.9 0.01 250 / 0.5);
+  box-shadow: 0 4px 30px oklch(0.5 0.02 250 / 0.08);
+}
+
+/* Animated gradient border - Light Theme */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.gradient-border {
+  --angle: 0deg;
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(oklch(1 0 0), oklch(1 0 0)) padding-box,
+    linear-gradient(var(--angle), oklch(0.55 0.25 260), oklch(0.6 0.2 200), oklch(0.5 0.22 290)) border-box;
+  animation: rotate-gradient 4s linear infinite;
+}
+
+@keyframes rotate-gradient {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Mesh gradient animation - Light Theme */
+.mesh-gradient {
+  background: 
+    radial-gradient(at 40% 20%, oklch(0.55 0.25 260 / 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, oklch(0.5 0.22 290 / 0.06) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, oklch(0.6 0.2 200 / 0.06) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, oklch(0.55 0.25 260 / 0.06) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, oklch(0.5 0.22 290 / 0.08) 0px, transparent 50%);
+}
+
+/* Particle animation placeholder */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* Marquee animation — two copies, moves exactly -50% for a seamless loop */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+/* New class for the trust section marquee track */
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* Counter animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Lenis smooth scroll styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Pinned section styles */
+.pin-spacer {
+  flex-shrink: 0;
+}
+
+/* Section reveal animations */
+.section-reveal {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Parallax depth layers */
+.parallax-slow {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.parallax-fast {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* GPU-accelerated base for GSAP animated elements */
+.gsap-animated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Cinematic text reveal */
+.text-reveal {
+  clip-path: inset(0 0 100% 0);
+}
+
+.text-reveal.revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Smooth card hover with depth */
+.depth-card {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.depth-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 40px -10px oklch(0.5 0.02 250 / 0.12);
+}
+
+/* Prevent depth-card lift from causing overflow/overlap */
+.depth-card {
+  position: relative;
+}
+
+/* Mobile: disable heavy hover transforms to avoid layout shifts */
+@media (max-width: 768px) {
+  .depth-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -6px oklch(0.5 0.02 250 / 0.1);
+  }
+
+  /* Prevent text overflow on mobile */
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Tighter gradient orbs on mobile (less GPU cost) */
+  .blur-3xl {
+    filter: blur(40px);
+  }
+}
+
+/* Prevent horizontal overflow globally */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Pinned section cleanup — prevent pin-spacer from collapsing on mobile */
+.pin-spacer {
+  flex-shrink: 0 !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   MOBILE APP EXPERIENCE — only applied below 768px
+   ───────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Remove iOS tap flash */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    /* Momentum scrolling on older iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Tell the browser every element allows vertical panning by default.
+       This prevents overflow:hidden ancestors from silently eating swipe
+       gestures before they reach the window scroll. */
+    touch-action: pan-y;
+  }
+
+  body {
+    /* "clip" is identical visually to "hidden" but does NOT make <body>
+       the scroll container on iOS Safari — the critical difference that
+       keeps window.scrollY accurate and native scroll working. */
+    overflow-x: clip;
+    /* Allow native overscroll bounce — fighting it can feel sticky */
+    overscroll-behavior-y: auto;
+  }
+
+  /* Hide scrollbar — apps don't show one */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    scrollbar-width: none;
+  }
+
+  /* ── scroll-margin-top so scrollIntoView clears the fixed top navbar (h-16 = 64px) ── */
+  /* NOTE: no scroll-snap-* here — CSS snap conflicts with GSAP ScrollTrigger on mobile */
+  #services,
+  #synkbot,
+  #work,
+  #process,
+  #contact {
+    scroll-margin-top: 64px;
+  }
+
+  /* Hero goes edge-to-edge, no offset needed */
+  #hero-section {
+    scroll-margin-top: 0;
+  }
+
+  /* ── Mobile hero: full small-viewport height ── */
+  #hero-section section {
+    min-height: 100svh;
+  }
+
+  /* ── Larger touch targets globally ── */
+  button, a {
+    min-height: 44px; /* Apple HIG minimum */
+  }
+
+  /* ── App-card style for depth sections ── */
+  .depth-card {
+    border-radius: 20px;
+  }
+
+  .depth-card:hover {
+    /* Disable hover lift on touch — avoid sticky hover state on iOS */
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ── Section reveal feels snappier on mobile ── */
+  .section-reveal {
+    transition-duration: 0.35s;
+  }
+
+  /* ── Tighten container padding for mobile ── */
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* ── Bottom-nav safe-area background fill
+        Extends the glass colour into the system home-indicator area ── */
+  .mobile-nav-safe-fill {
+    background: oklch(1 0 0 / 0.9);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ── Animate bottom-nav entrance smoothly even on first paint ── */
+@keyframes slide-up-nav {
+  from { transform: translateY(100px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* ── App-like active-state scale on all interactive elements (mobile) ── */
+@media (max-width: 767px) {
+  @media (hover: none) {
+    a:active, button:active {
+      transform: scale(0.97);
+      transition: transform 0.1s ease;
+    }
+  }
+}
+
+/* ── Smooth section entry: fade + lift — used by GSAP but defined here ── */
+@keyframes mobile-section-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.mobile-section-in {
+  animation: mobile-section-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
