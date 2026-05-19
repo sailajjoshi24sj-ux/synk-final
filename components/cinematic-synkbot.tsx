@@ -8,6 +8,7 @@ import {
   MessageCircle, Bot, Zap, TrendingUp,
   Users, Clock, CheckCircle2, Sparkles,
 } from "lucide-react"
+import ScrollReveal from "./ui/scroll-reveal"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -19,10 +20,10 @@ const features = [
 ]
 
 const chatMessages = [
-  { type: "user", text: "Hi! I saw your product and I'm interested",                                                                                           delay: 0    },
-  { type: "bot",  text: "Hello! Thanks for reaching out! I'd love to help you learn more. What specifically caught your eye?",                                 delay: 1200 },
-  { type: "user", text: "The premium package looks great. What's included?",                                                                                   delay: 2800 },
-  { type: "bot",  text: "Great choice! The premium package includes: unlimited automation, priority support, custom AI training, and analytics. Want a demo?", delay: 4200 },
+  { type: "user", text: "Hey! Saw your product — super interested 👀",                                  delay: 0    },
+  { type: "bot",  text: "Hey! 👋 What caught your eye?",                                                delay: 450  },
+  { type: "user", text: "The premium plan. What's included?",                                           delay: 950  },
+  { type: "bot",  text: "Unlimited automation, custom AI & priority support. Want a demo? 🚀",          delay: 1500 },
 ]
 
 function PhoneMockup({ children }: { children: React.ReactNode }) {
@@ -77,9 +78,10 @@ function ChatBubble({ type, text, isVisible }: { type: string; text: string; isV
 }
 
 export function CinematicSynkBot() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const leftRef    = useRef<HTMLDivElement>(null)
-  const phoneRef   = useRef<HTMLDivElement>(null)
+  const sectionRef     = useRef<HTMLElement>(null)
+  const leftRef        = useRef<HTMLDivElement>(null)
+  const phoneRef       = useRef<HTMLDivElement>(null)
+  const benefitsRef    = useRef<HTMLElement>(null)
   const [visibleMessages, setVisibleMessages] = useState<number[]>([])
   const [isInView, setIsInView]               = useState(false)
   const [messagesReady, setMessagesReady]     = useState(false)
@@ -106,11 +108,11 @@ export function CinematicSynkBot() {
           onLeaveBack: () => { setIsInView(false); setVisibleMessages([]) },
         })
       } else {
-        // Trigger on the phone element itself — it's now near the top of the section
+        // On mobile, start messages immediately when phone enters — no wait for flip
         ScrollTrigger.create({
           trigger: phone,
           start: "top 80%",
-          onEnter:     () => setIsInView(true),
+          onEnter:     () => { setIsInView(true); setMessagesReady(true) },
           onLeaveBack: () => { setIsInView(false); setVisibleMessages([]) },
         })
       }
@@ -124,7 +126,6 @@ export function CinematicSynkBot() {
           opacity: 1, y: 0,
           duration: 0.8,
           ease: "power3.out",
-          onComplete: () => setMessagesReady(true),
           scrollTrigger: {
             trigger: phone,
             start: "top 88%",
@@ -207,7 +208,89 @@ export function CinematicSynkBot() {
     return () => timers.forEach(clearTimeout)
   }, [isInView, messagesReady])
 
+  // ── Benefits section dramatic scroll animations ──────────────────────
+  useEffect(() => {
+    const section = benefitsRef.current
+    if (!section) return
+
+    const ctx = gsap.context(() => {
+      // Eyebrow: lines extend outward, label fades in
+      const eyebrowLabel = section.querySelector<HTMLElement>(".eyebrow-label")
+      const eyebrowLeft  = section.querySelector<HTMLElement>(".eyebrow-line-left")
+      const eyebrowRight = section.querySelector<HTMLElement>(".eyebrow-line-right")
+      if (eyebrowLabel && eyebrowLeft && eyebrowRight) {
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: eyebrowLabel, start: "top 88%", toggleActions: "play none none none" },
+        })
+        tl.from(eyebrowLeft,  { scaleX: 0, transformOrigin: "right",  duration: 0.7, ease: "power3.out" })
+          .from(eyebrowLabel, { opacity: 0, y: 12, duration: 0.45, ease: "power2.out" }, "-=0.4")
+          .from(eyebrowRight, { scaleX: 0, transformOrigin: "left",   duration: 0.7, ease: "power3.out" }, "-=0.6")
+      }
+
+      // Each numbered pillar
+      const pillars = gsap.utils.toArray<HTMLElement>(".synk-pillar", section)
+      pillars.forEach((pillar) => {
+        const num  = pillar.querySelector<HTMLElement>(".pillar-num")
+        const line = pillar.querySelector<HTMLElement>(".pillar-line")
+        const text = pillar.querySelector<HTMLElement>(".pillar-text")
+        if (!num || !line || !text) return
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: pillar,
+            start: "top 78%",
+            toggleActions: "play none none none",
+          },
+        })
+
+        tl.to(pillar, { opacity: 1, duration: 0.01 })
+          // Number: shrinks from oversized blur to sharp stamp
+          .to(num, {
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.85,
+            ease: "expo.out",
+          })
+          // Border draws down from top
+          .to(line, {
+            scaleY: 1,
+            duration: 0.55,
+            ease: "power3.inOut",
+          }, "-=0.6")
+          // Text slides in from the right
+          .to(text, {
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+          }, "-=0.45")
+      })
+
+      // Punch line: scale up from below
+      const punchline = section.querySelector<HTMLElement>(".synk-punchline")
+      if (punchline) {
+        gsap.from(punchline, {
+          scale: 0.82,
+          opacity: 0,
+          y: 40,
+          duration: 0.9,
+          ease: "back.out(1.6)",
+          scrollTrigger: { trigger: punchline, start: "top 82%", toggleActions: "play none none none" },
+        })
+      }
+
+      // Background orbs parallax
+      const orbLeft  = section.querySelector<HTMLElement>(".benefit-orb-left")
+      const orbRight = section.querySelector<HTMLElement>(".benefit-orb-right")
+      if (orbLeft) gsap.to(orbLeft,  { y: -80, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 2 } })
+      if (orbRight) gsap.to(orbRight, { y: -50, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 3 } })
+    }, section)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
+    <>
     <section
       ref={sectionRef}
       className="relative bg-gradient-to-b from-background via-secondary/20 to-background overflow-hidden py-16 lg:min-h-screen lg:flex lg:items-center"
@@ -359,5 +442,117 @@ export function CinematicSynkBot() {
         </div>
       </div>
     </section>
+
+    {/* ── Benefits Reveal ──────────────────────────────────────────────── */}
+    <section ref={benefitsRef} className="relative bg-gradient-to-b from-background to-secondary/20 py-16 lg:py-24 overflow-hidden">
+
+      {/* Subtle top connector line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-border to-transparent pointer-events-none" />
+
+      {/* Background glow accents */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="benefit-orb-left absolute top-1/3 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="benefit-orb-right absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+
+        {/* Section eyebrow — lines animated outward by GSAP */}
+        <div className="flex items-center gap-6 mb-20">
+          <div className="eyebrow-line-left h-px flex-1 bg-gradient-to-r from-transparent via-border to-primary/30" />
+          <span className="eyebrow-label text-xs font-bold tracking-[0.25em] uppercase text-primary/60 whitespace-nowrap px-2">
+            The Synk Bot Difference
+          </span>
+          <div className="eyebrow-line-right h-px flex-1 bg-gradient-to-l from-transparent via-border to-primary/30" />
+        </div>
+
+        {/* Manifesto — large scroll-driven word reveal */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur
+            baseRotation={5}
+            blurStrength={10}
+            wordAnimationEnd="bottom 55%"
+            textClassName="text-[clamp(1.85rem,4.8vw,3.8rem)] font-bold text-foreground leading-snug"
+          >
+            Every second your inbox sits unanswered is a sale walking out the door. Synk Bot steps in, replying instantly, qualifying automatically, converting relentlessly. Around the clock.
+          </ScrollReveal>
+        </div>
+
+        {/* Three revelation pillars — GSAP scroll animations */}
+        <div className="max-w-4xl mx-auto space-y-14 mb-14">
+          {([
+            {
+              num: "01",
+              text: "Businesses see a dramatic jump in qualified leads within the first week, without changing a single workflow.",
+            },
+            {
+              num: "02",
+              text: "Response time drops from hours to under one second. No lost prospects. No missed windows. Ever.",
+            },
+            {
+              num: "03",
+              text: "Handle ten thousand simultaneous conversations. Zero extra headcount. Zero overtime. Truly infinite scale.",
+            },
+          ] as const).map(({ num, text }) => (
+            <div
+              key={num}
+              className="synk-pillar flex gap-6 lg:gap-14 items-start"
+              style={{ opacity: 0 }}
+            >
+              {/* Oversized number — starts blurred & scaled up, stamps in */}
+              <div className="flex-shrink-0 pt-1 w-14 lg:w-20">
+                <span
+                  className="pillar-num block text-5xl lg:text-7xl font-black leading-none select-none"
+                  style={{
+                    color: "oklch(0.55 0.25 260 / 0.32)",
+                    transform: "scale(1.75)",
+                    filter: "blur(14px)",
+                    display: "block",
+                  }}
+                >
+                  {num}
+                </span>
+              </div>
+
+              {/* Text side — border draws, then text slides in */}
+              <div className="flex-1 pl-6 relative">
+                {/* Animated left border */}
+                <div
+                  className="pillar-line absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/40 to-transparent"
+                  style={{ transform: "scaleY(0)", transformOrigin: "top" }}
+                />
+                {/* Text */}
+                <div
+                  className="pillar-text"
+                  style={{ opacity: 0, transform: "translateX(40px)" }}
+                >
+                  <p className="text-[clamp(1.15rem,2.4vw,1.9rem)] font-semibold text-foreground leading-snug">
+                    {text}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Final punch line */}
+        <div className="synk-punchline text-center">
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={false}
+            baseRotation={-3}
+            wordAnimationEnd="bottom 75%"
+            containerClassName="inline-block"
+            textClassName="text-[clamp(1.5rem,3.2vw,2.8rem)] font-bold gradient-text"
+          >
+            Not just automation. Your unfair advantage.
+          </ScrollReveal>
+        </div>
+
+      </div>
+    </section>
+    </>
   )
 }

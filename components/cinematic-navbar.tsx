@@ -82,18 +82,10 @@ export function CinematicNavbar() {
             })}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <a href="#contact" className="bp" style={{ fontSize: "0.9rem", padding: "0.6rem 1.5rem" }}>
-              Start Project
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-
-          {/* Mobile: "Start Project" pill — replaces hamburger; bottom nav handles navigation */}
+          {/* CTA — shown on all breakpoints; bottom nav handles mobile section navigation */}
           <a
             href="#contact"
-            className="bp md:hidden"
+            className="bp"
             style={{ fontSize: "0.875rem", padding: "0.625rem 1.25rem", WebkitTapHighlightColor: "transparent" }}
           >
             Start Project

@@ -240,20 +240,25 @@ export function CinematicTestimonials() {
             </div>
 
             {/* Dots */}
-            <div className="flex justify-center gap-3 mt-8">
+            <div className="flex justify-center gap-1 mt-8">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
+                  aria-label={`Go to testimonial ${index + 1}`}
                   onClick={() => {
                     setDirection(index > currentIndex ? 1 : -1)
                     setCurrentIndex(index)
                   }}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? "bg-primary w-8"
-                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2.5"
-                  }`}
-                />
+                  className="flex items-center justify-center w-11 h-11"
+                >
+                  <span
+                    className={`block rounded-full transition-all duration-300 h-2.5 ${
+                      index === currentIndex
+                        ? "bg-primary w-8"
+                        : "bg-muted-foreground/30 w-2.5"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>

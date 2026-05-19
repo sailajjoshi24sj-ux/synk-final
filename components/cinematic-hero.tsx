@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SyncBackground } from "@/components/sync-background"
 import {
   motion,
   useMotionValue,
@@ -321,6 +322,9 @@ export function CinematicHero() {
     >
       {/* ─── Background ──────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Sync flow canvas — neural mesh */}
+        <SyncBackground />
+
         {/* Primary radial glow — top right */}
         <div
           className="absolute -top-32 -right-32 w-[750px] h-[750px] rounded-full"
@@ -430,7 +434,6 @@ export function CinematicHero() {
                 className="flex flex-col sm:flex-row gap-4 mb-12"
               >
                 <MagneticButton label="Start Your Project" primary />
-                <MagneticButton label="Explore Work" />
               </motion.div>
 
               {/* Trust row */}
@@ -618,7 +621,7 @@ export function CinematicHero() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.9 }}
-              className="lg:hidden w-full max-w-sm mx-auto"
+              className="hidden"
             >
               <div className="glass rounded-2xl p-5 shadow-xl border border-white/60">
                 <div className="flex items-center justify-between mb-4">

@@ -78,9 +78,10 @@ export function CinematicProcess() {
       )
 
       // ── Header entrance ───────────────────────────────────────────
-      gsap.from(header, {
-        opacity: 0,
-        y: 40,
+      // Element starts hidden via inline style; we only animate TO visible
+      gsap.to(header, {
+        opacity: 1,
+        y: 0,
         duration: 0.85,
         ease: "power3.out",
         scrollTrigger: {
@@ -92,11 +93,7 @@ export function CinematicProcess() {
 
       const cards = gsap.utils.toArray<HTMLElement>(".process-step")
       const dots  = gsap.utils.toArray<HTMLElement>(".process-dot")
-
-      // ── Pre-hide everything ────────────────────────────────────────
-      gsap.set(cards, { opacity: 0, y: 55, scale: 0.93 })
-      gsap.set(dots,  { scale: 0, opacity: 0 })
-      gsap.set(".timeline-line", { scaleY: 0 })
+      // No gsap.set needed — elements start hidden via inline styles in JSX
 
       // ── Timeline line draws as the section scrolls through ────────
       gsap.to(".timeline-line", {
@@ -161,8 +158,8 @@ export function CinematicProcess() {
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 via-transparent to-secondary/20 pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div ref={headerRef} className="text-center mb-20">
+        {/* Header — starts hidden; GSAP animates to opacity:1 */}
+        <div ref={headerRef} className="text-center mb-20" style={{ opacity: 0, transform: "translateY(40px)" }}>
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-6">
             Our Process
           </span>
@@ -178,7 +175,7 @@ export function CinematicProcess() {
         <div ref={timelineRef} className="relative max-w-4xl mx-auto">
           {/* Center line */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2 hidden md:block">
-            <div className="timeline-line absolute inset-0 bg-gradient-to-b from-primary via-accent to-primary origin-top" />
+            <div className="timeline-line absolute inset-0 bg-gradient-to-b from-primary via-accent to-primary origin-top" style={{ transform: "scaleY(0)", willChange: "transform" }} />
           </div>
 
           {/* Steps */}
@@ -189,6 +186,7 @@ export function CinematicProcess() {
                 className={`process-step relative md:flex items-center ${
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
+                style={{ opacity: 0, transform: "translateY(55px) scale(0.93)" }}
               >
                 {/* Content card */}
                 <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
@@ -209,7 +207,7 @@ export function CinematicProcess() {
                 </div>
 
                 {/* Center dot */}
-                <div className="process-dot hidden md:flex absolute left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-card border-4 border-primary z-10" />
+                <div className="process-dot hidden md:flex absolute left-1/2 w-5 h-5 rounded-full bg-card border-4 border-primary z-10" style={{ opacity: 0, transform: "scale(0)", marginLeft: "-10px" }} />
 
                 {/* Spacer */}
                 <div className="hidden md:block md:w-1/2" />

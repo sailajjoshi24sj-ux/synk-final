@@ -8,6 +8,7 @@ import {
   Globe, Smartphone, Bot, Workflow,
   MessageSquare, Palette, Database, Cpu,
 } from "lucide-react"
+import ScrollStack, { ScrollStackItem } from "@/components/ui/scroll-stack"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -35,6 +36,7 @@ export function CinematicServices() {
     const bg      = bgRef.current
     if (!section || !header || !grid || !bg) return
 
+    const isMobile = window.innerWidth < 640
     const ctx = gsap.context(() => {
       // ── Parallax background ─────────────────────────────
       gsap.to(bg, {
@@ -61,8 +63,8 @@ export function CinematicServices() {
         },
       })
 
-      // ── Service cards: cinematic stagger entrance ───────
-      // Set all cards invisible up front so there's no flash before trigger
+      // ── Service cards: cinematic stagger entrance (desktop only) ───
+      if (isMobile) return
       const cards = gsap.utils.toArray<HTMLElement>(".service-card")
       gsap.set(cards, { opacity: 0, y: 80, scale: 0.82, rotateX: 12 })
 
@@ -107,19 +109,21 @@ export function CinematicServices() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
-      style={{ background: "oklch(0.985 0.005 250)", perspective: "1000px" }}
+      className="relative py-12 md:py-32"
+      style={{ background: "oklch(0.985 0.005 250)" }}
     >
-      {/* Parallax mesh gradient background */}
-      <div
-        ref={bgRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 20% 0%, oklch(0.55 0.25 260 / 0.06) 0%, transparent 70%)," +
-            "radial-gradient(ellipse 60% 50% at 80% 100%, oklch(0.6 0.2 200 / 0.05) 0%, transparent 70%)",
-        }}
-      />
+      {/* Background — clipped in its own container so it never bleeds on mobile */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          ref={bgRef}
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 20% 0%, oklch(0.55 0.25 260 / 0.06) 0%, transparent 70%)," +
+              "radial-gradient(ellipse 60% 50% at 80% 100%, oklch(0.6 0.2 200 / 0.05) 0%, transparent 70%)",
+          }}
+        />
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
 
@@ -136,10 +140,44 @@ export function CinematicServices() {
           </p>
         </div>
 
-        {/* Cards Grid */}
+        {/* ── Mobile: stacked scroll cards ──────────────────────────── */}
+        <div className="sm:hidden -mx-4">
+          <ScrollStack
+            useWindowScroll
+            itemDistance={55}
+            itemScale={0.035}
+            itemStackDistance={20}
+            stackPosition="15%"
+            scaleEndPosition="5%"
+            baseScale={0.86}
+          >
+            {services.map((service, index) => (
+              <ScrollStackItem key={index}>
+                <div className="bg-card rounded-2xl p-5 mx-4 relative overflow-hidden border border-border shadow-lg" style={{ minHeight: "11rem" }}>
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.gradient}
+                                flex items-center justify-center mb-4`}
+                  >
+                    <service.icon className={`w-6 h-6 ${service.iconColor}`} />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{service.description}</p>
+                  {/* Subtle gradient accent */}
+                  <div
+                    className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} opacity-10 pointer-events-none`}
+                  />
+                </div>
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
+        </div>
+
+        {/* ── Desktop / tablet: 2-col → 4-col grid ──────────────────── */}
+        {/* perspective scoped here so it doesn't affect mobile ScrollStack */}
+        <div className="hidden sm:block" style={{ perspective: "1000px" }}>
         <div
           ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
           style={{ transformStyle: "preserve-3d" }}
         >
           {services.map((service, index) => (
@@ -152,7 +190,6 @@ export function CinematicServices() {
                 className="glass rounded-2xl p-5 md:p-7 h-full relative overflow-hidden
                             transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
               >
-                {/* Coloured icon badge */}
                 <div
                   className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${service.gradient}
                               flex items-center justify-center mb-5
@@ -160,7 +197,6 @@ export function CinematicServices() {
                 >
                   <service.icon className={`w-6 h-6 md:w-7 md:h-7 ${service.iconColor}`} />
                 </div>
-
                 <h3 className="text-lg md:text-xl font-bold text-foreground mb-2 md:mb-3
                                group-hover:text-primary transition-colors">
                   {service.title}
@@ -168,8 +204,6 @@ export function CinematicServices() {
                 <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
                   {service.description}
                 </p>
-
-                {/* Hover gradient wash */}
                 <div
                   className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient}
                                opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none`}
@@ -178,6 +212,7 @@ export function CinematicServices() {
             </div>
           ))}
         </div>
+        </div>{/* end perspective wrapper */}
       </div>
     </section>
   )
