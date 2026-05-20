@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { LoadingScreen } from '@/components/loading-screen'
 
 const geistSans = Geist({ 
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen overflow-x-hidden">
+        <LoadingScreen />
         {children}
       </body>
     </html>
