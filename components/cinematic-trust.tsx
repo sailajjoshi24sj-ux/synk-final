@@ -14,10 +14,28 @@ const stats = [
   { value: 24, suffix: "/7", label: "Support Available" },
 ]
 
-const technologies = [
-  "Next.js", "React", "TypeScript", "Node.js", "Python", "TensorFlow",
-  "OpenAI", "AWS", "Vercel", "Prisma", "PostgreSQL", "MongoDB",
-  "Flutter", "Swift", "Kotlin", "Docker", "Kubernetes", "GraphQL"
+const techRow1 = [
+  { name: "Next.js",     color: "#000000" },
+  { name: "React",       color: "#61DAFB" },
+  { name: "TypeScript",  color: "#3178C6" },
+  { name: "Node.js",     color: "#339933" },
+  { name: "Python",      color: "#3776AB" },
+  { name: "OpenAI",      color: "#412991" },
+  { name: "AWS",         color: "#FF9900" },
+  { name: "TensorFlow",  color: "#FF6F00" },
+  { name: "GraphQL",     color: "#E10098" },
+]
+
+const techRow2 = [
+  { name: "Docker",      color: "#2496ED" },
+  { name: "Kubernetes",  color: "#326CE5" },
+  { name: "PostgreSQL",  color: "#336791" },
+  { name: "MongoDB",     color: "#47A248" },
+  { name: "Flutter",     color: "#02569B" },
+  { name: "Swift",       color: "#FA7343" },
+  { name: "Kotlin",      color: "#7F52FF" },
+  { name: "Prisma",      color: "#2D3748" },
+  { name: "Vercel",      color: "#000000" },
 ]
 
 function AnimatedCounter({
@@ -170,20 +188,42 @@ export function CinematicTrust() {
         </div>
       </div>
 
-      {/* Tech Stack Marquee — full-width, outside container */}
-      <div className="relative w-full overflow-hidden py-2">
+      {/* Premium Tech Stack — two-row marquee */}
+      <div className="relative w-full overflow-hidden space-y-3 py-4">
         {/* Fade masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-secondary/80 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-secondary/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, oklch(0.97 0.008 250), transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, oklch(0.97 0.008 250), transparent)" }} />
 
-        {/* Two copies = seamless loop at translateX(-50%) */}
-        <div className="marquee-track flex gap-4 md:gap-6 w-max">
-          {[...technologies, ...technologies].map((tech, index) => (
+        {/* Row 1 — left to right */}
+        <div className="marquee-track flex gap-3 w-max">
+          {[...techRow1, ...techRow1].map((tech, i) => (
             <div
-              key={index}
-              className="flex-shrink-0 px-4 md:px-6 py-2 md:py-3 rounded-full bg-card border border-border text-foreground font-medium whitespace-nowrap text-sm md:text-base"
+              key={i}
+              className="flex-shrink-0 flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-gray-200/80 shadow-sm whitespace-nowrap"
             >
-              {tech}
+              <span
+                className="w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: tech.color }}
+              />
+              <span className="text-sm font-semibold text-gray-800 tracking-wide">{tech.name}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Row 2 — right to left (reverse) */}
+        <div className="flex gap-3 w-max" style={{ animation: "marquee 32s linear infinite reverse" }}>
+          {[...techRow2, ...techRow2].map((tech, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-gray-200/80 shadow-sm whitespace-nowrap"
+            >
+              <span
+                className="w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: tech.color }}
+              />
+              <span className="text-sm font-semibold text-gray-800 tracking-wide">{tech.name}</span>
             </div>
           ))}
         </div>

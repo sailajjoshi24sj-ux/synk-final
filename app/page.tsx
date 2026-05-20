@@ -10,10 +10,14 @@ import { CinematicCTA } from "@/components/cinematic-cta"
 import { CinematicFooter } from "@/components/cinematic-footer"
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 import { MobileBottomNav } from "@/components/mobile-bottom-nav"
+import { MeshBackground } from "@/components/hero-section"
 
 export default function Home() {
   return (
     <SmoothScrollProvider>
+      {/* Animated mesh gradient fixed behind the entire page */}
+      <MeshBackground />
+
       <CinematicNavbar />
 
       <main className="relative">

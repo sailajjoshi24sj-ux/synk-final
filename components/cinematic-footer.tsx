@@ -1,9 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { 
-  Mail, 
-  MapPin, 
+import {
+  Mail,
+  MapPin,
   Phone,
   Linkedin,
   Twitter,
@@ -38,58 +38,58 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Twitter,   href: "#", label: "Twitter"   },
+  { icon: Linkedin,  href: "#", label: "LinkedIn"  },
   { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Github,    href: "#", label: "GitHub"    },
 ]
 
 export function CinematicFooter() {
   return (
-    <footer className="relative bg-secondary/30 border-t border-border">
+    <footer className="relative bg-white border-t border-gray-200">
+
       {/* Main Footer */}
       <div className="container mx-auto px-6 py-20">
         <div className="grid lg:grid-cols-5 gap-12">
+
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-2xl">S</span>
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                <span className="text-white font-bold text-2xl">S</span>
               </div>
-              <span className="text-2xl font-bold text-foreground">Synk Corp</span>
+              <span className="text-2xl font-bold text-black">Synk Corp</span>
             </Link>
-            <p className="text-muted-foreground leading-relaxed mb-8 max-w-sm">
-              Building intelligent digital experiences that transform businesses 
+
+            <p className="text-black/70 leading-relaxed mb-8 max-w-sm">
+              Building intelligent digital experiences that transform businesses
               and delight users worldwide.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-4">
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Mail className="w-5 h-5 text-primary" />
-                <span>hello@synkcorp.com</span>
+              <div className="flex items-center gap-3 text-black/70">
+                <Mail className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                <span>info@synkcorp.com</span>
               </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Phone className="w-5 h-5 text-primary" />
-                <span>+1 (555) 123-4567</span>
+              <div className="flex items-center gap-3 text-black/70">
+                <Phone className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                <span>9851363489 / 9841602632</span>
               </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span>San Francisco, CA</span>
+              <div className="flex items-center gap-3 text-black/70">
+                <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                <span>Baneshwor, Kathmandu</span>
               </div>
             </div>
           </div>
 
           {/* Links Columns */}
           <div>
-            <h4 className="font-semibold text-foreground mb-6">Services</h4>
+            <h4 className="font-semibold text-black mb-6">Services</h4>
             <ul className="space-y-4">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                  <Link href={link.href} className="text-black/60 hover:text-black transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -98,14 +98,11 @@ export function CinematicFooter() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-6">Company</h4>
+            <h4 className="font-semibold text-black mb-6">Company</h4>
             <ul className="space-y-4">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                  <Link href={link.href} className="text-black/60 hover:text-black transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -114,14 +111,11 @@ export function CinematicFooter() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-6">Resources</h4>
+            <h4 className="font-semibold text-black mb-6">Resources</h4>
             <ul className="space-y-4">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                  <Link href={link.href} className="text-black/60 hover:text-black transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -132,15 +126,14 @@ export function CinematicFooter() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-border">
+      <div className="border-t border-gray-200">
         <div className="container mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            {/* Copyright */}
-            <div className="text-muted-foreground text-sm">
+
+            <div className="text-black/50 text-sm">
               &copy; {new Date().getFullYear()} Synk Corp. All rights reserved.
             </div>
 
-            {/* Social Links */}
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
                 <motion.a
@@ -148,20 +141,19 @@ export function CinematicFooter() {
                   href={social.href}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-secondary hover:border-primary/30 transition-colors"
+                  className="w-10 h-10 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center hover:bg-gray-200 transition-colors"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-4 h-4 text-muted-foreground" />
+                  <social.icon className="w-4 h-4 text-black/60" />
                 </motion.a>
               ))}
             </div>
 
-            {/* Legal Links */}
             <div className="flex items-center gap-6 text-sm">
-              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link href="#" className="text-black/50 hover:text-black transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link href="#" className="text-black/50 hover:text-black transition-colors">
                 Terms of Service
               </Link>
             </div>
@@ -169,15 +161,16 @@ export function CinematicFooter() {
         </div>
       </div>
 
-      {/* Scroll to top indicator */}
+      {/* Scroll to top */}
       <motion.button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg hover:bg-foreground/90 transition-colors z-50"
+        className="fixed bottom-8 right-8 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50"
+        style={{ background: "linear-gradient(135deg, #2563EB, #7c3aed)" }}
         aria-label="Scroll to top"
       >
-        <ArrowUpRight className="w-5 h-5 rotate-[-45deg]" />
+        <ArrowUpRight className="w-5 h-5 text-white rotate-[-45deg]" />
       </motion.button>
     </footer>
   )

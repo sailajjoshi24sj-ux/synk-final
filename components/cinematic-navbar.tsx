@@ -24,8 +24,8 @@ function getActiveNav(): string {
 }
 
 export function CinematicNavbar() {
-  const [scrolled, setScrolled]       = useState(false)
-  const [activeHref, setActiveHref]   = useState("")
+  const [scrolled, setScrolled]     = useState(false)
+  const [activeHref, setActiveHref] = useState("")
 
   useEffect(() => {
     function onScroll() {
@@ -38,42 +38,43 @@ export function CinematicNavbar() {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
-          : "bg-transparent"
+          ? "backdrop-blur-2xl bg-white/5 border-b border-white/10"
+          : ""
       }`}
     >
-      <nav className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo — visible on all breakpoints */}
-          <Link href="/" className="flex items-center gap-2.5 md:gap-3">
-            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg md:text-xl">S</span>
+      <nav className="container mx-auto px-8 lg:px-12">
+        <div className="flex items-center justify-between h-[72px] md:h-[80px]">
+
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-300">
+              <span className="text-white font-bold text-lg md:text-xl">S</span>
             </div>
-            <span className="text-lg md:text-xl font-bold text-foreground">Synk Corp</span>
+            <span className="text-lg md:text-xl font-bold text-white tracking-tight">Synk Corp</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10 lg:gap-12">
             {navItems.map((item) => {
               const isActive = activeHref === item.href
               return (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`relative font-medium transition-colors duration-200 ${
-                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  className={`relative text-[13px] font-semibold tracking-[0.04em] uppercase transition-colors duration-200 ${
+                    isActive ? "text-black" : "text-black/70 hover:text-black"
                   }`}
                 >
                   {item.label}
                   {isActive && (
                     <motion.span
                       layoutId="nav-underline"
-                      className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-primary"
+                      className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-cyan-400"
                       transition={{ type: "spring", stiffness: 500, damping: 40 }}
                     />
                   )}
@@ -82,11 +83,16 @@ export function CinematicNavbar() {
             })}
           </div>
 
-          {/* CTA — shown on all breakpoints; bottom nav handles mobile section navigation */}
+          {/* CTA */}
           <a
             href="#contact"
             className="bp"
-            style={{ fontSize: "0.875rem", padding: "0.625rem 1.25rem", WebkitTapHighlightColor: "transparent" }}
+            style={{
+              fontSize: "0.8125rem",
+              padding: "0.625rem 1.5rem",
+              letterSpacing: "0.03em",
+              WebkitTapHighlightColor: "transparent",
+            }}
           >
             Start Project
             <ArrowRight className="w-3.5 h-3.5" />
